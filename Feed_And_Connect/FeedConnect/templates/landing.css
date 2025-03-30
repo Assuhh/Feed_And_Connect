@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #007BFF; /* Blue background */
+    background-color: #72A0C1; /* Blue background */
     color: #FFFFFF; /* White text */
 }
 
@@ -54,7 +54,7 @@ body {
 
 .login-btn {
     padding: 10px 20px;
-    background-color: #28a745; /* Green button */
+    background-color: gray; /* color button */
     border: none;
     border-radius: 5px;
     color: #FFFFFF;
@@ -62,7 +62,7 @@ body {
 }
 
 .login-btn:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #72A0C1; /* Darker on hover */
 }
 
 .pet-images {
