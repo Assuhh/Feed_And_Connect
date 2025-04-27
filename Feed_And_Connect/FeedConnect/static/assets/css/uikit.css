@@ -8,7 +8,7 @@
  
 /* Selection pseudo-element
  ========================================================================== */
-::selection {
+ ::selection {
   background: rgb(38, 16, 80);
   color: #fff;
   text-shadow: none;

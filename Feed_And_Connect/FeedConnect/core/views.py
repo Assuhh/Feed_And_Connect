@@ -6,8 +6,52 @@ from django.contrib.auth.decorators import login_required
 from .models import Profile, Post, LikePost, FollowersCount
 from itertools import chain
 import random
-
+import requests
+from django.views.decorators.csrf import csrf_exempt
+from .models import FeedHistory
 # Create your views here.
+
+# Your actual Blynk auth token
+BLYNK_TOKEN = 'dcvtcgx8l422kc7zPEPPIw2AybNKNQRx'
+BLYNK_URL = 'https://blynk.cloud/external/api/update'
+
+def send_to_blynk(pin, value):
+    """Send a value to a Blynk virtual pin."""
+    url = f"{BLYNK_URL}?token={BLYNK_TOKEN}&{pin}={value}"
+    try:
+        requests.get(url)
+    except requests.exceptions.RequestException as e:
+        print(f"Blynk API error: {e}")
+
+@csrf_exempt
+def dashboard(request):
+    
+    if request.method == "POST":
+        if 'feed_now' in request.POST:
+            send_to_blynk('V0', 1)
+            portion = request.POST.get('portion', 0)
+            FeedHistory.objects.create(amount=portion or 0, feed_type='manual')
+
+        
+        if portion:
+            send_to_blynk('V1', portion)
+
+        schedule_time = request.POST.get('schedule_time')
+        if schedule_time:
+            send_to_blynk('V2', schedule_time)
+
+        next_time = request.POST.get('next_schedule')
+        if next_time:
+            send_to_blynk('V3', next_time)
+
+        toggle = '1' if request.POST.get('schedule_toggle') else '0'
+        send_to_blynk('V4', toggle)
+
+    return render(request, 'dashboard.html')
+
+def feed_history(request):
+    history = FeedHistory.objects.order_by('-timestamp')
+    return render (request, 'feed_history.html', {'history' : history})
 
 @login_required(login_url='signin')
 def index(request):
@@ -68,9 +112,9 @@ def upload(request):
         new_post = Post.objects.create(user=user, image=image, caption=caption)
         new_post.save()
 
-        return redirect('/')
+        return redirect('index')
     else:
-        return redirect('/')
+        return redirect('index')
 
 @login_required(login_url='signin')
 def search(request):
@@ -229,12 +273,11 @@ def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('main page')
         else:
             messages.info(request, 'Credentials Invalid')
             return redirect('signin')
@@ -245,3 +288,13 @@ def signin(request):
 def logout(request):
     auth.logout(request)
     return redirect('signin')
+
+
+def landing_page(request):
+    return render(request, 'landing page.html')
+
+def landing_2(request):
+    return render(request, 'landing2.html')
+
+def feed(request):
+    return render(request, 'feed.html')

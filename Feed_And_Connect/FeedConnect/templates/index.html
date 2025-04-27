@@ -19,9 +19,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<body>
+<body style="background: linear-gradient(to top right, #cce5f6, #003366); min-height: 100vh; margin: 0;">
+
 
             <header>
+                <a href="javascript:history.back()" 
+   style="background-color: #012169; color: white; font-weight: bold; text-decoration: none; padding: 10px 16px; border-radius: 6px; font-size: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); display: inline-block; float: left; margin: 10px;">
+   &#8592;
+</a>
                 <div class="header_inner">
                     <form action="/search" method="POST">
                     {% csrf_token %}
@@ -54,69 +59,71 @@
                     </form>
                     <div class="right-side lg:pr-4">
                          <!-- upload -->
-                        <a href="#"
-                            class="bg-pink-500 flex font-bold hidden hover:bg-pink-600 hover:text-white inline-block items-center lg:block max-h-10 mr-4 px-4 py-2 rounded shado text-white">
-                            <ion-icon name="add-circle" class="-mb-1
-                             mr-1 opacity-90 text-xl uilus-circle"></ion-icon> Upload Pics / Videos
-                        </a>
+                         <a href="#" class="upload-button">
+                            <ion-icon name="add-circle" class="upload-icon"></ion-icon>
+                            Upload Pics / Videos
+                          </a>
+                          
                          <!-- upload dropdown box -->
-                        <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" class="header_dropdown">
-    
+                         <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small" class="dropdown-box">
+
                             <!-- notivication header -->
-                            <div class="px-4 py-3 -mx-5 -mt-4 mb-5 border-b">
+                            <div class="dropdown-header">
                                 <h4>Upload Pics</h4>
                             </div>
-    
+                        
                             <!-- notification contents -->
-                            <div class="flex justify-center flex-center text-center">
-    
-                                <div class="flex flex-col choose-upload text-center">
-                                   
-                                    <div class="bg-gray-100 border-2 border-dashed flex flex-col h-24 items-center justify-center relative w-full rounded-lg  ">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12">
+                            <div class="dropdown-content">
+                        
+                                <div class="upload-form">
+                        
+                                    <div class="upload-box">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="upload-icon">
                                             <path d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z" />
                                             <path d="M9 13h2v5a1 1 0 11-2 0v-5z" />
                                         </svg>
                                     </div>
-
+                        
                                     <form action="upload" method="POST" enctype="multipart/form-data">
-                                    {% csrf_token %}
-                                    <p class="my-3 leading-6"> Upload pics
-                                    </p>
-                                    <div>
-                                        <input type="file" name="image_upload">
-                                        {% comment %} <a href="#" class="button soft-warning small"> Choose file</a> {% endcomment %}
-                                        <textarea class="button soft-warning small" name="caption" placeholder="caption..." ></textarea>
+                                        {% csrf_token %}
+                                        <p class="upload-text">Upload pics</p>
+                                        <input type="file" name="image_upload" class="upload-input">
+                                        <textarea class="caption-area" name="caption" placeholder="caption..."></textarea>
                                         <br>
-                                        <button class="button bg-blue-700" type="submit" >Upload</button>
-                                    </div>
+                                        <button class="upload-btn" type="submit">Upload</button>
                                     </form>
-                                    {% comment %} <a href="#" class="uk-text-muted mt-3 uk-link"
+                        
+                                    {% comment %}
+                                    <a href="#" class="uk-text-muted mt-3 uk-link"
                                         uk-toggle="target: .choose-upload ;  animation: uk-animation-slide-right-small, uk-animation-slide-left-medium; queued: true">
-                                        Or Import Video </a> {% endcomment %}
+                                        Or Import Video </a>
+                                    {% endcomment %}
+                        
                                 </div>
-    
-                                <div class="uk-flex uk-flex-column choose-upload" hidden>
-                                    <div class="mx-auto flex flex-col h-24 items-center justify-center relative w-full rounded-lg">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-12">
+                        
+                                <div class="alternate-upload" hidden>
+                                    <div class="upload-box">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="upload-icon">
                                             <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h2.5a4.5 4.5 0 10-.616-8.958 4.002 4.002 0 10-7.753 1.977A3.5 3.5 0 002 9.5zm9 3.5H9V8a1 1 0 012 0v5z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <p class="my-3 leading-6"> Import videos from YouTube <br> Copy / Paste your video link here </p>
-                                    <form class="uk-grid-small" uk-grid>
-                                        <div class="uk-width-expand">
-                                            <input type="text" class="uk-input uk-form-small  bg-gray-200 " style="box-shadow:none" placeholder="Paste link">
+                                    <p class="upload-text">Import videos from YouTube <br> Copy / Paste your video link here </p>
+                                    <form class="link-form" uk-grid>
+                                        <div class="link-field">
+                                            <input type="text" class="link-input" placeholder="Paste link">
                                         </div>
-                                        <div class="uk-width-auto"> <button type="submit" class="button soft-warning -ml-2">
-                                                Import </button> </div>
+                                        <div class="link-button">
+                                            <button type="submit" class="import-btn">Import</button>
+                                        </div>
                                     </form>
-                                    <a href="#" class="uk-text-muted mt-3 uk-link"
+                                    <a href="#" class="toggle-link"
                                         uk-toggle="target: .choose-upload ; animation: uk-animation-slide-left-small, uk-animation-slide-right-medium; queued: true">
                                         Or Upload Video </a>
                                 </div>
-    
+                        
                             </div>
-                            <div class="px-4 py-3 -mx-5 -mb-4 mt-5 border-t text-sm">
+                        
+                            <div class="dropdown-footer">
                                 Your Image size Must be Maxmium 999MB
                             </div>
                         </div>
@@ -181,14 +188,12 @@
                         <a href="#">
                             <img src="{{user_profile.profileimg.url}}" class="header-avatar" alt="">
                         </a>
-                        <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
-                            <ul>
-                                <li><a href="/settings"> Account setting </a> </li>
-                                {% comment %} <li><a href="explore.html">explore </a> </li> {% endcomment %}
-                                {% comment %} <li><a href="#"> Help </a> </li> {% endcomment %}
-                                <li><a href="logout"> Log Out</a></li>
+                        <div uk-drop="mode: click;offset:9" class="profile-dropdown">
+                            <ul class="profile-dropdown-list">
+                              <li><a href="/settings" class="profile-link">Account setting</a></li>
+                              <li><a href="/logout" class="profile-link">Log Out</a></li>
                             </ul>
-                        </div>
+                          </div>
 
                     </div>
                 </div>
@@ -845,9 +850,8 @@
                     <!-- right sidebar-->
                     <div class="lg:w-5/12">
 
-                        <div class="bg-white  shadow-md rounded-md overflow-hidden">
-
-                            <div class="bg-gray-50  border-b border-gray-100 flex items-baseline justify-between py-4 px-6 ">
+                        <div style="background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden;">
+                            <div style="background-color: #aecddd; border-bottom: 1px solid #B9D9EB; display: flex; align-items: baseline; justify-content: space-between; padding: 16px 24px;">
                                 <h2 class="font-semibold text-lg">Users You Can Follow</h2>
                                 {% comment %} <a href="#"> Refresh</a> {% endcomment %}
                             </div>
@@ -866,7 +870,8 @@
                                         </div>
                                     </div>
                                     
-                                    <a href="/profile/{{suggestion.user}}" class="border border-gray-200 font-semibold px-4 py-1 rounded-full hover:bg-pink-600 hover:text-white hover:border-pink-600 "> View User </a>
+                                    <a href="/profile/{{suggestion.user}}" class="view-user-btn"> View User </a>
+
                                 </div>
                                 {% endfor %}
                                 {% comment %} <div class="flex items-center justify-between py-3">

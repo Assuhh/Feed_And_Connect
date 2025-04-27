@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    background: #fdfdfd;
+  }
+  
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    z-index: 10;
+  }
+  
+  .nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    color: #0a2351;
+    font-size: 1.5rem;
+  }
+  
+  /* Login Button */
+  .login-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-weight: bold;
+  }
+  
+  .login-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Hero Banner */
+  .hero {
+    height: 100vh;
+    background: linear-gradient(to right, #B9D9EB, #012169);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Sections */
+  .section {
+    padding: 60px 20px;
+  }
+  
+  .section-light {
+    background: #ffffff;
+    color: #333;
+  }
+  
+  .section-dark {
+    background: #f0f0f0;
+    color: #111;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .image img {
+    width: 50%;
+    max-width: 500px;
+    border-radius: 10px;
+  }
+  
+  .text {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  /* Footer CTA */
+  .cta-footer {
+    background: #012169;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  .cta-footer h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Button */
+  .btn {
+    display: inline-block;
+    background: #005A9C;
+    color: white;
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .btn:hover {
+    background: #87CEFA;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .reverse {
+      flex-direction: column;
+    }
+  
+    .image img {
+      max-width: 100%;
+    }
+  
+    .logo, .login-btn {
+      font-size: 1.1rem;
+    }
+  
+    .hero-content h1 {
+      font-size: 2.2rem;
+    }
+  
+    .hero-content p {
+      font-size: 1.2rem;
+    }
+  }

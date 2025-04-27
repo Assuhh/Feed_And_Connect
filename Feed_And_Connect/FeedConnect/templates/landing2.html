@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feed&Connect</title>
+  <link rel="stylesheet" href="{% static 'assets/css/landing1.css' %}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h2 class="logo">Feed&Connect</h2>
+      <a href="/signin" class="btn login-btn">Login</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <h1>🐾 Feed&Connect</h1>
+      <p>A Social Community Platform for pets and owners.</p>
+      <a href="#cta" class="btn">Join the Community</a>
+    </div>
+  </header>
+
+  <!-- Section 1 -->
+  <section class="section section-light">
+    <div class="container reverse">
+      <div class="text">
+        <h2>Share Your Pet's Life</h2>
+        <p>Capture your pet's happiest moments and share them with a loving community.</p>
+      </div>
+      <div class="image">
+        <img src="{% static 'images/resources/golden-retriever.png' %}" alt="Dog" class="pet-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section section-dark">
+    <div class="container">
+      <div class="image">
+        <img src="{% static 'images/resources/dog-food.png' %}" alt="Food" class="pet-img">
+      </div>
+      <div class="text">
+        <h2>Connect & Discover</h2>
+        <p>Find new pet pals, join fun challenges, and discover pet-friendly spots near you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section section-light" id="join">
+    <div class="container reverse">
+      <div class="text">
+        <h2>Build Your Pet’s Profile</h2>
+        <p>Create a personal space for your furry friend with their own bio, photos, and more.</p>
+      </div>
+      <div class="image">
+        <img src="{% static 'images/resources/cat.png' %}" alt="Cat" class="pet-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer / Call-to-Action -->
+  <footer class="cta-footer" id="cta">
+    <h2>Ready to Join the Community?</h2>
+    <a href="/signin" class="btn">Get Started Now</a>
+  </footer>
+
+</body>
+</html>

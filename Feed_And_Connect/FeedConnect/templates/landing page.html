@@ -1,37 +1,115 @@
-
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet App</title>
-    <link rel="stylesheet" href="landing.css">
+    <title>Feed & Connect</title>
+    <link rel="stylesheet" href="{% static 'assets/css/landing.css' %}">
+    <script src="{% static 'assets/js/landing.js' %}" defer></script>
 </head>
 
 <body>
-
     <div class="container">
         <div class="sidebar">
-            <img src="path/to/logo.png" alt="Logo" class="logo">
+            <img src="{% static 'images/resources/pet-feeder.png' %}" alt="Logo" class="logo">
             <nav class="nav-links">
-                <a href="#">FEED</a>
-                <a href="#">CONNECT</a>
-                <a href="#">HISTORY</a>
-                <a href="#">BMI</a>
+                <a href="index" onclick="showSection('news-feed')">SOCIAL MEDIA</a>
+                <a href="#" onclick="showSection('e_commerce')">E-COMMERCE</a>
+                <a href="#" onclick="showSection('control')">CONTROL</a>
+                <a href="#" onclick="showSection('setting')">SETTING</a>
+                <a href="#" onclick="showSection('feed-history')">FEED HISTORY</a>
+                <a href="#" onclick="showSection('bmi')">BMI</a>
             </nav>
         </div>
+
         <div class="main-content">
-            <div class="login-section">
-                <button class="login-btn">LOGIN</button>
-                <div class="login-info">
-                    <p>bla</p>
-                </div>
+            {% comment %} <div id="news-feed" class="content-section active">Welcome to the News Feed!</div> {% endcomment %}
+            <div id="control" class="content-section">
+                <!-- Smart Pet Feeder Control Panel (Pure CSS version) -->
+<div class="pet-feeder-container">
+    <h2>Smart Pet Feeder Control Panel</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Portion Size</label>
+            <input type="range" min="1" max="10" name="portion">
+        </div>
+        <div class="form-group">
+            <button type="submit" name="feed_now" class="btn-success">Feed Now</button>
+        </div>
+        <div class="form-group">
+            <label>Schedule Feed Time</label>
+            <input type="time" name="schedule_time">
+        </div>
+        <div class="form-group">
+            <label>Next Feed Time</label>
+            <input type="time" name="next_schedule">
+        </div>
+        <div class="form-group toggle-group">
+            <input type="checkbox" name="schedule_toggle" id="schedule_toggle">
+            <label for="schedule_toggle">Enable Schedule</label>
+        </div>
+        <button type="submit" class="btn-primary">Update Settings</button>
+    </form>
+</div>
+
             </div>
-            <div class="pet-images">
-                <img src="path/to/dog.png" alt="Dog" class="pet-img">
-                <img src="path/to/cat.png" alt="Cat" class="pet-img">
-                <img src="path/to/bowl.png" alt="Bowl" class="pet-img">
+            <div id="e_commerce" class="content-section">Sell your items here.</div>
+            <div id="setting" class="content-section">Change your settings here.</div>
+            <div id="feed-history" class="content-section">
+                <div style="background-color: #0A0A60; color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: fit-content; max-width: 900px; margin: auto; font-family: sans-serif;">
+
+                    <h2 style="margin-top: 0; margin-bottom: 30px;">Feeding History</h2>
+                
+                    <!-- Table Header -->
+                    <div style="display: grid; grid-template-columns: 2fr 2fr 2fr; background-color: #aecddd; font-weight: bold; padding: 15px; border-radius: 6px 6px 0 0; color: black; border: 1px solid #88b0cc;">
+                        <div style="border-right: 1px solid #88b0cc;">Time</div>
+                        <div style="border-right: 1px solid #88b0cc;">Amount</div>
+                        <div>Type</div>
+                    </div>
+                
+                    <!-- Table Rows -->
+                    {% for feed in history %}
+                    <div style="display: grid; grid-template-columns: 2fr 2fr 2fr; padding: 15px; background-color: #ffffffcc; color: black; border-left: 1px solid #88b0cc; border-right: 1px solid #88b0cc; border-bottom: 1px solid #88b0cc;">
+                        <div style="border-right: 1px solid #88b0cc;">{{ feed.timestamp }}</div>
+                        <div style="border-right: 1px solid #88b0cc;">{{ feed.amount }}</div>
+                        <div>{{ feed.feed_type }}</div>
+                    </div>
+                    {% empty %}
+                    <div style="padding: 15px; text-align: center; background-color: #fff; color: black; border: 1px solid #88b0cc;">
+                        No Records Yet.
+                    </div>
+                    {% endfor %}
+                
+                    <!-- Back Link -->
+                    <div style="margin-top: 30px;">
+                        <a href="{% url 'dashboard' %}" style="color: #B9D9EB; text-decoration: none; font-weight: bold;">Back to Feeding</a>
+                    </div>
+                
+                </div>
+            </div>    
+            <div id="bmi" class="content-section">
+<title>Pet BMI Calculator</title>
+ 
+<h2>Pet BMI Calculator</h2>
+
+<div class="bmi-placeholder">
+    <p>This feature is currently under development.</p>
+    <p>The BMI calculator will help you monitor your pet's health by calculating their Body Mass Index based on weight and size measurements.</p>
+</div>
+
+<style>
+    .bmi-placeholder {
+        background-color: #191970;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
             </div>
         </div>
     </div>
